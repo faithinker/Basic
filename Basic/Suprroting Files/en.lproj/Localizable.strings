@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  Basic
+
+  Created by pineone on 2021/11/05.
+  
+*/
+
+/*
+ 영어가 기본값이다. 한국어만 쓸때는 English에 한국어를 적고,
+ 다국어를 쓸때만 분리해서 전부 써준다.
+ "키" = "값";   => 세미콜론 반드시 넣어줘야 한다.
+ */
+
+
+"test" = "This is a Test";

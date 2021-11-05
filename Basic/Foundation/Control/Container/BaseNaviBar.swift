@@ -82,26 +82,16 @@ class BaseNavigationBar: UIView {
     }
 
     lazy var homeLogoImageView: UIView = {
-        #if !RELEASE
-        return UIButton().then {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.setImage(#imageLiteral(resourceName: "imgLogoNor"), for: .normal)
-            $0.isHidden = true
-//            $0.rx.tap.on(next: self.logAction).disposed(by: rx.disposeBag)
-        }
-        #else
         return UIImageView().then {
             $0.translatesAutoresizingMaskIntoConstraints = false
 //            $0.image = #imageLiteral(resourceName: "imgLogoNor")
             $0.isHidden = true
         }
-        #endif
     }()
 
     lazy var backButton = UIButton().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(#imageLiteral(resourceName: "BtnCommonBefore"), for: .normal)
-//        $0.setImage(#imageLiteral(resourceName: "icTopBackPre"), for: .highlighted)
+        $0.setImage(R.image.btnCommonBefore(), for: .normal)
         $0.isHidden = true
         $0.rx.tap.map { BaseNavigationActionType.back }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
@@ -150,7 +140,7 @@ class BaseNavigationBar: UIView {
     lazy var closeButton = UIButton().then {
         $0.isHidden = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(#imageLiteral(resourceName: "btnBtnPopupCloseNor"), for: .normal)// xmark
+        $0.setImage(R.image.btnClose(), for: .normal)
         $0.contentMode = .scaleAspectFill
         $0.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2)
         $0.rx.tap.map { BaseNavigationActionType.dismiss }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
@@ -158,22 +148,19 @@ class BaseNavigationBar: UIView {
     
     lazy var settingButton = UIButton().then {
         $0.isHidden = true
-        $0.setImage(#imageLiteral(resourceName: "btnCommonSettingsNor"), for: .normal)
-        $0.setImage(#imageLiteral(resourceName: "btnCommonSettingsSel"), for: .selected)
+        $0.setImage(R.image.btnCommonSettingsNor(), for: .normal)
         $0.rx.tap.map { BaseNavigationActionType.setting }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
     
     lazy var moreButton = UIButton().then {
         $0.isHidden = true
-        $0.setImage(#imageLiteral(resourceName: "btnCommonMoreNor"), for: .normal)
-        $0.setImage(#imageLiteral(resourceName: "btnCommonMoreSel"), for: .selected)
+        $0.setImage(R.image.btnCommonMoreNor(), for: .normal)
         $0.rx.tap.map { BaseNavigationActionType.more }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
     
     lazy var deleteButton = UIButton().then {
         $0.isHidden = true
-        $0.setImage(#imageLiteral(resourceName: "meetupTopBtnCommonDelNor"), for: .normal)
-        $0.setImage(#imageLiteral(resourceName: "meetupTopBtnCommonDelSel"), for: .selected)
+        $0.setImage(R.image.delNor(), for: .normal)
         $0.rx.tap
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .map { .delete }.bind(to: navigationAction).disposed(by: rx.disposeBag)
@@ -202,12 +189,12 @@ class BaseNavigationBar: UIView {
     }
 
     func setupView() {
-        backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        backgroundColor = R.color.white_1005()
         self.addSubview(containerView)
         containerView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview()
             $0.height.equalTo(56)
-            $0.top.greaterThanOrEqualToSuperview()
+            $0.top.equalToSafeAreaAuto(self)
         }
 
         containerView.addSubviews([homeLogoImageView, backButton, titleLabel, titleButton, searchButton, imageAugmentationButton, countLabel, bottomLine, closeButton, settingButton, moreButton, deleteButton])

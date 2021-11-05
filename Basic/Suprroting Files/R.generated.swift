@@ -106,10 +106,14 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 1 colors.
+  /// This `R.color` struct is generated, and contains static references to 3 colors.
   struct color {
     /// Color `AccentColor`.
     static let accentColor = Rswift.ColorResource(bundle: R.hostingBundle, name: "AccentColor")
+    /// Color `white_1000`.
+    static let white_1000 = Rswift.ColorResource(bundle: R.hostingBundle, name: "white_1000")
+    /// Color `white_1005`.
+    static let white_1005 = Rswift.ColorResource(bundle: R.hostingBundle, name: "white_1005")
 
     #if os(iOS) || os(tvOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
@@ -120,11 +124,45 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "white_1000", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func white_1000(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.white_1000, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "white_1005", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func white_1005(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.white_1005, compatibleWith: traitCollection)
+    }
+    #endif
+
     #if os(watchOS)
     /// `UIColor(named: "AccentColor", bundle: ..., traitCollection: ...)`
     @available(watchOSApplicationExtension 4.0, *)
     static func accentColor(_: Void = ()) -> UIKit.UIColor? {
       return UIKit.UIColor(named: R.color.accentColor.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "white_1000", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func white_1000(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.white_1000.name)
+    }
+    #endif
+
+    #if os(watchOS)
+    /// `UIColor(named: "white_1005", bundle: ..., traitCollection: ...)`
+    @available(watchOSApplicationExtension 4.0, *)
+    static func white_1005(_: Void = ()) -> UIKit.UIColor? {
+      return UIKit.UIColor(named: R.color.white_1005.name)
     }
     #endif
 
@@ -194,6 +232,120 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
+  /// This `R.image` struct is generated, and contains static references to 12 images.
+  struct image {
+    /// Image `BtnCommonBeforeW`.
+    static let btnCommonBeforeW = Rswift.ImageResource(bundle: R.hostingBundle, name: "BtnCommonBeforeW")
+    /// Image `BtnCommonBefore`.
+    static let btnCommonBefore = Rswift.ImageResource(bundle: R.hostingBundle, name: "BtnCommonBefore")
+    /// Image `DelNor`.
+    static let delNor = Rswift.ImageResource(bundle: R.hostingBundle, name: "DelNor")
+    /// Image `btnClose`.
+    static let btnClose = Rswift.ImageResource(bundle: R.hostingBundle, name: "btnClose")
+    /// Image `btnCommonClose`.
+    static let btnCommonClose = Rswift.ImageResource(bundle: R.hostingBundle, name: "btnCommonClose")
+    /// Image `btnCommonMoreNor`.
+    static let btnCommonMoreNor = Rswift.ImageResource(bundle: R.hostingBundle, name: "btnCommonMoreNor")
+    /// Image `btnCommonSettingsNor`.
+    static let btnCommonSettingsNor = Rswift.ImageResource(bundle: R.hostingBundle, name: "btnCommonSettingsNor")
+    /// Image `icBell`.
+    static let icBell = Rswift.ImageResource(bundle: R.hostingBundle, name: "icBell")
+    /// Image `icCamera`.
+    static let icCamera = Rswift.ImageResource(bundle: R.hostingBundle, name: "icCamera")
+    /// Image `icDelNor`.
+    static let icDelNor = Rswift.ImageResource(bundle: R.hostingBundle, name: "icDelNor")
+    /// Image `icFolder`.
+    static let icFolder = Rswift.ImageResource(bundle: R.hostingBundle, name: "icFolder")
+    /// Image `icMic`.
+    static let icMic = Rswift.ImageResource(bundle: R.hostingBundle, name: "icMic")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "BtnCommonBefore", bundle: ..., traitCollection: ...)`
+    static func btnCommonBefore(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.btnCommonBefore, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "BtnCommonBeforeW", bundle: ..., traitCollection: ...)`
+    static func btnCommonBeforeW(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.btnCommonBeforeW, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "DelNor", bundle: ..., traitCollection: ...)`
+    static func delNor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.delNor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "btnClose", bundle: ..., traitCollection: ...)`
+    static func btnClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.btnClose, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "btnCommonClose", bundle: ..., traitCollection: ...)`
+    static func btnCommonClose(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.btnCommonClose, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "btnCommonMoreNor", bundle: ..., traitCollection: ...)`
+    static func btnCommonMoreNor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.btnCommonMoreNor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "btnCommonSettingsNor", bundle: ..., traitCollection: ...)`
+    static func btnCommonSettingsNor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.btnCommonSettingsNor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icBell", bundle: ..., traitCollection: ...)`
+    static func icBell(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icBell, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icCamera", bundle: ..., traitCollection: ...)`
+    static func icCamera(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icCamera, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icDelNor", bundle: ..., traitCollection: ...)`
+    static func icDelNor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icDelNor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icFolder", bundle: ..., traitCollection: ...)`
+    static func icFolder(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icFolder, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icMic", bundle: ..., traitCollection: ...)`
+    static func icMic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icMic, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
   /// This `R.info` struct is generated, and contains static references to 1 properties.
   struct info {
     struct uiApplicationSceneManifest {
@@ -216,6 +368,36 @@ struct R: Rswift.Validatable {
         }
 
         fileprivate init() {}
+      }
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.string` struct is generated, and contains static references to 1 localization tables.
+  struct string {
+    /// This `R.string.localizable` struct is generated, and contains static references to 1 localization keys.
+    struct localizable {
+      /// en translation: This is a Test
+      ///
+      /// Locales: en
+      static let test = Rswift.StringResource(key: "test", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en"], comment: nil)
+
+      /// en translation: This is a Test
+      ///
+      /// Locales: en
+      static func test(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("test", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "test"
+        }
+
+        return NSLocalizedString("test", bundle: bundle, comment: "")
       }
 
       fileprivate init() {}

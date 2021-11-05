@@ -18,9 +18,10 @@ class HomeView: UIBasePreviewType {
     typealias Model = Void
     
     // MARK: - init
-    override init(naviType: BaseNavigationShowType = .none) {
+    override init(naviType: BaseNavigationShowType = .backTitle) {
         super.init(naviType: naviType)
         setupLayout()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,7 +30,8 @@ class HomeView: UIBasePreviewType {
     
     // MARK: - View
     lazy var label = UILabel().then {
-        $0.text = "Home Views"
+        $0.text = R.string.localizable.test() // "Home Views"
+        $0.font = R.font.notoSansKRRegular(size: 18)
         $0.textColor = .red
     }
     

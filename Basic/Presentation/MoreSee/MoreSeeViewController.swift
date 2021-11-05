@@ -39,7 +39,7 @@ class MoreSeeViewController: UIBaseViewController, ViewModelProtocol {
     let subView = MoreSeeView()
     
     func setupLayout() {
-        self.view.addSubview(subView)
+        view.addSubview(subView)
         subView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

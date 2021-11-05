@@ -39,7 +39,7 @@ class HomeViewController: UIBaseViewController, ViewModelProtocol {
     let subView = HomeView()
     
     func setupLayout() {
-        self.view.addSubview(subView)
+        view.addSubview(subView)
         subView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
