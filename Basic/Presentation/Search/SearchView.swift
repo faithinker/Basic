@@ -17,6 +17,8 @@ class SearchView: UIBasePreviewType {
     // MARK: - Model type implemente
     typealias Model = Void
     
+    let actionRelay = PublishRelay<SearchActionType>()
+    
     // MARK: - init
     override init(naviType: BaseNavigationShowType = .none) {
         super.init(naviType: naviType)
@@ -29,7 +31,8 @@ class SearchView: UIBasePreviewType {
     
     // MARK: - View
     lazy var label = UILabel().then {
-        $0.text = "Search View"
+        $0.text = R.string.localizable.test() // "Home Views"
+        $0.font = R.font.notoSansKRRegular(size: 18)
         $0.textColor = .red
     }
     
@@ -45,8 +48,11 @@ class SearchView: UIBasePreviewType {
         }
     }
     
-    func setupDI(observable: Observable<[Model]>) {
-        // model Dependency Injection
+    /// User Input
+    @discardableResult
+    func setupDI(relay: PublishRelay<SearchActionType>) -> Self {
+        actionRelay.bind(to: relay).disposed(by: rx.disposeBag)
+        return self
     }
 }
 

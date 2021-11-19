@@ -232,7 +232,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 12 images.
+  /// This `R.image` struct is generated, and contains static references to 14 images.
   struct image {
     /// Image `BtnCommonBeforeW`.
     static let btnCommonBeforeW = Rswift.ImageResource(bundle: R.hostingBundle, name: "BtnCommonBeforeW")
@@ -258,6 +258,10 @@ struct R: Rswift.Validatable {
     static let icFolder = Rswift.ImageResource(bundle: R.hostingBundle, name: "icFolder")
     /// Image `icMic`.
     static let icMic = Rswift.ImageResource(bundle: R.hostingBundle, name: "icMic")
+    /// Image `icTabbarSearchNor`.
+    static let icTabbarSearchNor = Rswift.ImageResource(bundle: R.hostingBundle, name: "icTabbarSearchNor")
+    /// Image `icTabbarSearchPre`.
+    static let icTabbarSearchPre = Rswift.ImageResource(bundle: R.hostingBundle, name: "icTabbarSearchPre")
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "BtnCommonBefore", bundle: ..., traitCollection: ...)`
@@ -340,6 +344,20 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "icMic", bundle: ..., traitCollection: ...)`
     static func icMic(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.icMic, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icTabbarSearchNor", bundle: ..., traitCollection: ...)`
+    static func icTabbarSearchNor(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icTabbarSearchNor, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "icTabbarSearchPre", bundle: ..., traitCollection: ...)`
+    static func icTabbarSearchPre(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.icTabbarSearchPre, compatibleWith: traitCollection)
     }
     #endif
 

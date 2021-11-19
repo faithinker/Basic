@@ -10,6 +10,11 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxFlow
+import Action
+
+enum SearchActionType {
+    
+}
 
 class SearchViewModel: ViewModelType, Stepper {
     // MARK: - Stepper
@@ -18,13 +23,27 @@ class SearchViewModel: ViewModelType, Stepper {
     // MARK: - ViewModelType Protocol
     typealias ViewModel = SearchViewModel
     
+    var disposeBag = DisposeBag()
+    
+    lazy var actionForNaviBar = Action<BaseNavigationActionType, Void> { [weak self] in
+        guard let `self` = self else { return .empty() }
+        switch $0 {
+            
+        default: break
+        }
+        return .empty()
+    }
+    
     struct Input {
+        let naviBarTrigger: PublishRelay<BaseNavigationActionType>
+        let actionTrigger: PublishRelay<SearchActionType>
     }
     
     struct Output {
     }
     
     func transform(req: ViewModel.Input) -> ViewModel.Output {
+        req.naviBarTrigger.bind(to: actionForNaviBar.inputs).disposed(by: disposeBag)
         return Output()
     }
 }

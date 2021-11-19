@@ -32,7 +32,6 @@ class BaseFlow: Flow {
         case .popVC:
             navigationController.popViewController(animated: true)
             return .none
-
         default: return .none
         }
     }

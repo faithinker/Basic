@@ -76,11 +76,11 @@ struct APIClient {
                     switch event {
                     case .success(let response):
                         do {
-                            let code = try response.map(Int.self, atKeyPath: "status")
+                            //let code = try response.map(Int.self, atKeyPath: "status")
                             //let desc = try response.map(String.self, atKeyPath: "desc")
-                            let resultCode = ServerApiProvider.ResultCode(rawValue: String(code).lowercased()) ?? .test_0000000
+                            let resultCode = ServerApiProvider.ResultCode(rawValue: String(response.statusCode)) ?? .test_0000000
 
-                            Log.d("[API] >> \(api.path): code = \(code), resultCode = \(resultCode)")
+                            Log.d("[API] >> \(api.path), resultCode = \(resultCode)")
 
                             if resultCode == .test_200 {
                                 do {
@@ -88,13 +88,15 @@ struct APIClient {
                                         let data = try response.map(T.self)
                                         observer(.success(data))
                                     } else {
-                                        let data = try response.map(T.self, atKeyPath: "data")
+                                        //let data = try response.map(T.self, atKeyPath: "data")
+                                        let data = try response.map(T.self)
                                         observer(.success(data))
                                     }
                                 } catch let error as NSError {
                                     Log.e("resultCode \(resultCode) ..... but error = \(error)")
                                     if error.code == 1 || error.code == 3 { //"Failed to map data to a Decodable object."
-                                        let data = try response.map(T.self, atKeyPath: "status")
+                                        //let data = try response.map(T.self, atKeyPath: "status")
+                                        let data = try response.map(T.self)
                                         observer(.success(data))
                                     }
                                 }

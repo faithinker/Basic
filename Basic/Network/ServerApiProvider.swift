@@ -108,12 +108,12 @@ extension ServerApiProvider: TargetType {
     }
     
     var headers: [String : String]? {
-        var header = [
-            "Key":        "Value"
-        ]
-        
-        Log.d("Header = \(header)")
-        return header
+//        var header = [
+//            "Key":        "Value"
+//        ]
+//
+//        Log.d("Header = \(header)")
+        return .none //header
     }
     /// 각각의 상황에 따른 에러케이스 추가
     var errors: Set<ServerApiProvider.ResultCode>? {

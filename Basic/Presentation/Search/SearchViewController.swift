@@ -20,6 +20,7 @@ class SearchViewController: UIBaseViewController, ViewModelProtocol {
     var viewModel: ViewModel!
     
     // MARK: - Properties
+    private let actionRelay = PublishRelay<SearchActionType>()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -32,7 +33,11 @@ class SearchViewController: UIBaseViewController, ViewModelProtocol {
     
     // MARK: - Binding
     func bindingViewModel() {
-        _ = viewModel.transform(req: ViewModel.Input())
+        _ = viewModel.transform(req: ViewModel.Input(naviBarTrigger: subView.naviBar.navigationAction,
+                                                     actionTrigger: actionRelay))
+        
+        subView
+            .setupDI(relay: actionRelay)
     }
     
     // MARK: - View

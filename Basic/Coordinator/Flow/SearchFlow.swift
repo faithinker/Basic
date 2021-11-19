@@ -21,6 +21,9 @@ class SearchFlow: BaseFlow {
         switch step {
         case .moreSee:
             return navigateSearchScreen()
+        case .popModal:
+            self.navigationController.dismiss(animated: true, completion: nil)
+            return .none
         default:
             return .none
         }

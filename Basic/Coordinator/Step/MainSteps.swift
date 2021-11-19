@@ -35,6 +35,4 @@ enum MainSteps: Step {
     case home
     case search
     case moreSee
-    
-    
 }

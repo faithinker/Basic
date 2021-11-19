@@ -64,9 +64,6 @@ class BaseNavigationBar: UIView {
         $0.backgroundColor = .clear
     }
 
-    /// 로그 올리기 위해 5번 이상 버튼 누를경우를 체크하기 위함
-    var logUploadCount = 0
-
     var title: String? {
         willSet {
             titleLabel.isHidden = false
@@ -113,8 +110,8 @@ class BaseNavigationBar: UIView {
 
     lazy var searchButton = UIButton().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.setImage(#imageLiteral(resourceName: "icTopSearchNor"), for: .normal)
-//        $0.setImage(#imageLiteral(resourceName: "icTopSearchPre"), for: .highlighted)
+        $0.setImage(#imageLiteral(resourceName: "icTabbarSearchNor"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icTabbarSearchPre"), for: .highlighted)
         $0.isHidden = true
         $0.rx.tap.map { BaseNavigationActionType.search }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
@@ -189,11 +186,11 @@ class BaseNavigationBar: UIView {
     }
 
     func setupView() {
-        backgroundColor = R.color.white_1005()
-        self.addSubview(containerView)
+        backgroundColor = R.color.white_1000()//R.color.white_1005()
+        addSubview(containerView)
         containerView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview()
-            $0.height.equalTo(56)
+            $0.height.equalTo(56+UIDevice.topSafeArea)
             $0.top.equalToSafeAreaAuto(self)
         }
 
@@ -209,7 +206,7 @@ class BaseNavigationBar: UIView {
         searchButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.width.height.equalTo(42)
-            $0.trailing.equalTo(imageAugmentationButton.snp.leading).offset(-6)
+            $0.leading.equalToSuperview().offset(15)
         }
 
         imageAugmentationButton.snp.makeConstraints {
@@ -349,24 +346,6 @@ class BaseNavigationBar: UIView {
 //                $0.width.equalTo(text.width(withConstrainedHeight: 22))
 //            }
 //        }
-    }
-}
-
-// FTP log Upload
-extension BaseNavigationBar {
-    func logAction() {
-        #if !RELEASE
-//        if !Log.isUploading {
-//            if logUploadCount < 7 {
-//                logUploadCount += 1
-//            } else {
-//                DispatchQueue.global(qos: .background).async {
-//                    self.logUploadCount = 0
-//                    Log.logAction()
-//                }
-//            }
-//        }
-        #endif
     }
 }
 
