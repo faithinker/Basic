@@ -17,7 +17,6 @@ target 'Basic' do
 
   pod 'Then'
   pod 'SnapKit'
-  pod 'R.swift'
   pod 'Reusable'
 #  pod 'SwiftLint'
   pod 'KeychainSwift'

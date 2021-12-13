@@ -32,13 +32,13 @@ class RatingTableViewCell: UITableViewCell, Reusable {
     
     lazy var ratingTitle = UILabel().then {
         $0.text = "평가 (10명 참여)"
-        $0.font = R.font.notoSansKRBold(size: 32)
+        $0.font = .notoSans(size: 32, weight: .bold)
     }
     
     lazy var ratingButton = UIButton().then {
         $0.setTitleColor(.white, for: .normal)
         $0.setTitle("앱 평가하기", for: .normal)
-        $0.setBackgroundColor(#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), for: .highlighted)
+        $0.setBackgroundColor(R.Color.blue, for: .highlighted)
         $0.borderColor = .black
         $0.borderWidth = 1
         $0.cornerRadius = 8

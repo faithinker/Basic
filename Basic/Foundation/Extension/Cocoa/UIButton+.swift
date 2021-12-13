@@ -5,7 +5,7 @@
 //  Created by pineone on 2021/11/08.
 //
 
-import Foundation
+import UIKit
 
 extension UIButton {
     func setBackgroundColor(_ color: UIColor, for state: UIControl.State) {

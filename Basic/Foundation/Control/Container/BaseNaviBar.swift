@@ -88,7 +88,7 @@ class BaseNavigationBar: UIView {
 
     lazy var backButton = UIButton().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(R.image.btnCommonBefore(), for: .normal)
+        $0.setImage(R.Image.Navi.btnCommonBefore, for: .normal)
         $0.isHidden = true
         $0.rx.tap.map { BaseNavigationActionType.back }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
@@ -137,7 +137,7 @@ class BaseNavigationBar: UIView {
     lazy var closeButton = UIButton().then {
         $0.isHidden = true
         $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.setImage(R.image.btnClose(), for: .normal)
+        $0.setImage(R.Image.Navi.btnClose, for: .normal)
         $0.contentMode = .scaleAspectFill
         $0.layer.transform = CATransform3DMakeScale(1.2, 1.2, 1.2)
         $0.rx.tap.map { BaseNavigationActionType.dismiss }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
@@ -145,19 +145,19 @@ class BaseNavigationBar: UIView {
     
     lazy var settingButton = UIButton().then {
         $0.isHidden = true
-        $0.setImage(R.image.btnCommonSettingsNor(), for: .normal)
+        $0.setImage(R.Image.Navi.btnCommonSettingsNor, for: .normal)
         $0.rx.tap.map { BaseNavigationActionType.setting }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
     
     lazy var moreButton = UIButton().then {
         $0.isHidden = true
-        $0.setImage(R.image.btnCommonMoreNor(), for: .normal)
+        $0.setImage(R.Image.Navi.btnCommonMoreNor, for: .normal)
         $0.rx.tap.map { BaseNavigationActionType.more }.bind(to: self.navigationAction).disposed(by: rx.disposeBag)
     }
     
     lazy var deleteButton = UIButton().then {
         $0.isHidden = true
-        $0.setImage(R.image.delNor(), for: .normal)
+        $0.setImage(R.Image.Navi.delNor, for: .normal)
         $0.rx.tap
             .debounce(.milliseconds(200), scheduler: MainScheduler.instance)
             .map { .delete }.bind(to: navigationAction).disposed(by: rx.disposeBag)
@@ -186,7 +186,7 @@ class BaseNavigationBar: UIView {
     }
 
     func setupView() {
-        backgroundColor = R.color.white_1000()//R.color.white_1005()
+        backgroundColor = R.Color.white_1000
         addSubview(containerView)
         containerView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview()

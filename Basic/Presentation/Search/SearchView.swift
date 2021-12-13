@@ -18,11 +18,13 @@ class SearchView: UIBasePreviewType {
     typealias Model = Void
     
     let actionRelay = PublishRelay<SearchActionType>()
-    
+
     // MARK: - init
-    override init(naviType: BaseNavigationShowType = .none) {
+    override init(naviType: BaseNavigationShowType = .centerTitle) {
         super.init(naviType: naviType)
+        naviBar.title = "ZEM 앱 상세보기"
         setupLayout()
+        appInfoTest()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,10 +32,16 @@ class SearchView: UIBasePreviewType {
     }
     
     // MARK: - View
-    lazy var label = UILabel().then {
-        $0.text = R.string.localizable.test() // "Home Views"
-        $0.font = R.font.notoSansKRRegular(size: 18)
-        $0.textColor = .red
+    
+    /// 앱 상세보기 테이블 뷰
+    lazy var tableView = UITableView().then {
+        $0.register(cellType: AppInfoTableViewCell.self)
+        $0.register(cellType: RatingTableViewCell.self)
+//        $0.register(cellType: ReviewTableViewCell.self)
+        $0.rowHeight = UITableView.automaticDimension
+        $0.separatorStyle = .none
+        $0.showsVerticalScrollIndicator = false
+        
     }
     
     // MARK: - Outlets
@@ -42,10 +50,37 @@ class SearchView: UIBasePreviewType {
     func setupLayout() {
         backgroundColor = .white
         
-        self.addSubview(label)
-        label.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+        addSubview(tableView)
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(naviBar.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+    }
+    
+    func appInfoTest() {
+        let apps = [HomeModel(appImageUrl: "https://tinyurl.com/yfmag6fm", appName: "브롤스타즈",
+                              apppVersion: "버전 5.2.1", appDesc: "만7세 / 순위 1위 / 일 평균 2시간 20분")]
+        let appsOb: Observable<[HomeModel]> = Observable.of(apps)
+        appsOb
+            .bind(to: tableView.rx.items(cellIdentifier: AppInfoTableViewCell.reuseIdentifier, cellType: AppInfoTableViewCell.self)) { [weak self] row, element, cell in
+                cell.setData(element)
+            }.disposed(by: rx.disposeBag)
+    }
+    ///FIXME: - HomeDataSource 로 구현해보기... AIS 홈부분 참고.
+    /// 여러가지 방법
+    /// 1. 스크롤뷰 -> 뷰,뷰, 테이블뷰
+    /// 2. 테이블뷰 -> 1,2번 CellType 고정 맨마지막만 늘어남.
+    /// 3. DataSource를 사용하여 섹션 구분하기
+    
+    @discardableResult
+    func setupDI(observable: Observable<[HomeModel]>) -> Self {
+        observable
+            .bind(to: tableView.rx.items(cellIdentifier: AppInfoTableViewCell.reuseIdentifier, cellType: AppInfoTableViewCell.self)) { row, element, cell in
+                cell.setData(element)
+            }.disposed(by: rx.disposeBag)
+        return self
     }
     
     /// User Input

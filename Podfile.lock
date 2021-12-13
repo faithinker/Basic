@@ -17,9 +17,6 @@ PODS:
     - RxSwift (~> 5.0)
   - "NSObject+Rx (5.1.0)":
     - RxSwift (~> 5.1)
-  - R.swift (5.4.0):
-    - R.swift.Library (~> 5.3.0)
-  - R.swift.Library (5.3.0)
   - Reusable (4.1.2):
     - Reusable/Storyboard (= 4.1.2)
     - Reusable/View (= 4.1.2)
@@ -63,7 +60,6 @@ DEPENDENCIES:
   - Kingfisher (~> 5.0)
   - Moya/RxSwift (~> 14.0)
   - "NSObject+Rx"
-  - R.swift
   - Reusable
   - RxCocoa (~> 5)
   - RxDataSources
@@ -86,8 +82,6 @@ SPEC REPOS:
     - Kingfisher
     - Moya
     - "NSObject+Rx"
-    - R.swift
-    - R.swift.Library
     - Reusable
     - RxCocoa
     - RxDataSources
@@ -110,8 +104,6 @@ SPEC CHECKSUMS:
   Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
-  R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
-  R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Reusable: 6bae6a5e8aa793c9c441db0213c863a64bce9136
   RxCocoa: e2ed092d5432e4296aa818021d27de4090ac0354
   RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
@@ -125,6 +117,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 029dd08d9d8d52b377c6c4f6c974c0ae60728776
+PODFILE CHECKSUM: 5dc8f4038416cc964ca18bef9a24bd1ce57ceb30
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
