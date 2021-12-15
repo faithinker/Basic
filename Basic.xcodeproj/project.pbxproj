@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C331A44E2766DEF70058F7BB /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A44D2766DEF70058F7BB /* R.swift */; };
-		C331A4532766F99F0058F7BB /* MultiTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A4522766F99F0058F7BB /* MultiTab.swift */; };
-		C331A4552766FAF00058F7BB /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A4542766FAF00058F7BB /* TabBar.swift */; };
 		C3643AC2273558FF0058F542 /* SnapKit+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3643AC1273558FF0058F542 /* SnapKit+.swift */; };
 		C373985027350F6400245B46 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C373984F27350F6400245B46 /* UIFont+Extension.swift */; };
 		C37398562735100300245B46 /* NOTOSANSKR-MEDIUM-HESTIA.OTF in Resources */ = {isa = PBXBuildFile; fileRef = C37398532735100300245B46 /* NOTOSANSKR-MEDIUM-HESTIA.OTF */; };
@@ -708,9 +706,7 @@
 				C3B50E022734B3B000162B0B /* UIKitPreview.swift in Sources */,
 				C397A12D2738F06400821B36 /* UIDevice+.swift in Sources */,
 				C3B50E322734B3B000162B0B /* SceneDelegate.swift in Sources */,
-				C331A4552766FAF00058F7BB /* TabBar.swift in Sources */,
 				C3B50DE62734B3AF00162B0B /* UIStackView+.swift in Sources */,
-				C331A4532766F99F0058F7BB /* MultiTab.swift in Sources */,
 				C3B50DEE2734B3AF00162B0B /* UIScrollView+.swift in Sources */,
 				C397A1272738E9D000821B36 /* RatingTableViewCell.swift in Sources */,
 				C3B50DF12734B3AF00162B0B /* UIImage+.swift in Sources */,
