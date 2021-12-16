@@ -33,8 +33,12 @@ extension R.Color {
     /// #00000, rgb 0 0 0
     static let white_1000 = UIColor(named: "white_1000")
     static let white_1005 = UIColor(named: "white_1005")
-    /// #3DACF7 61 172 247
+    /// #3DACF7,rgb 61 172 247
     static let blue = UIColor(61, 172, 247)
+    /// #000000,rgb 0 0 0
+    static let black = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+    /// #1D1C21, rgb 29 28 33
+    static let background = #colorLiteral(red: 0.1137254902, green: 0.1098039216, blue: 0.1294117647, alpha: 1)
 }
 
 extension R.Color.Base {

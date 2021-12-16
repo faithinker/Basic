@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C331A44E2766DEF70058F7BB /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = C331A44D2766DEF70058F7BB /* R.swift */; };
+		C35C3615276B2D2200CDA30D /* TabPagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3614276B2D2200CDA30D /* TabPagerView.swift */; };
+		C35C3617276B2D2D00CDA30D /* TabPagerContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3616276B2D2D00CDA30D /* TabPagerContents.swift */; };
+		C35C3619276B2D3600CDA30D /* TabPagerHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3618276B2D3600CDA30D /* TabPagerHeaderCell.swift */; };
+		C35C361B276B2D4000CDA30D /* TabPagerHeaderCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C361A276B2D4000CDA30D /* TabPagerHeaderCellModel.swift */; };
+		C35C361D276B2D5C00CDA30D /* TabPagerHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C361C276B2D5C00CDA30D /* TabPagerHeaderView.swift */; };
+		C35C361F276B2D6E00CDA30D /* StackCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C361E276B2D6E00CDA30D /* StackCollection.swift */; };
+		C35C3621276B2D9B00CDA30D /* UIPageViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35C3620276B2D9B00CDA30D /* UIPageViewController+.swift */; };
 		C3643AC2273558FF0058F542 /* SnapKit+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3643AC1273558FF0058F542 /* SnapKit+.swift */; };
 		C373985027350F6400245B46 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C373984F27350F6400245B46 /* UIFont+Extension.swift */; };
 		C37398562735100300245B46 /* NOTOSANSKR-MEDIUM-HESTIA.OTF in Resources */ = {isa = PBXBuildFile; fileRef = C37398532735100300245B46 /* NOTOSANSKR-MEDIUM-HESTIA.OTF */; };
@@ -93,8 +100,13 @@
 		2F933ADE473EC31D03042B39 /* Pods-Basic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Basic.release.xcconfig"; path = "Target Support Files/Pods-Basic/Pods-Basic.release.xcconfig"; sourceTree = "<group>"; };
 		95554DA88267CAE72F820495 /* Pods-Basic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Basic.debug.xcconfig"; path = "Target Support Files/Pods-Basic/Pods-Basic.debug.xcconfig"; sourceTree = "<group>"; };
 		C331A44D2766DEF70058F7BB /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
-		C331A4522766F99F0058F7BB /* MultiTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiTab.swift; sourceTree = "<group>"; };
-		C331A4542766FAF00058F7BB /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		C35C3614276B2D2200CDA30D /* TabPagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPagerView.swift; sourceTree = "<group>"; };
+		C35C3616276B2D2D00CDA30D /* TabPagerContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPagerContents.swift; sourceTree = "<group>"; };
+		C35C3618276B2D3600CDA30D /* TabPagerHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPagerHeaderCell.swift; sourceTree = "<group>"; };
+		C35C361A276B2D4000CDA30D /* TabPagerHeaderCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPagerHeaderCellModel.swift; sourceTree = "<group>"; };
+		C35C361C276B2D5C00CDA30D /* TabPagerHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabPagerHeaderView.swift; sourceTree = "<group>"; };
+		C35C361E276B2D6E00CDA30D /* StackCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackCollection.swift; sourceTree = "<group>"; };
+		C35C3620276B2D9B00CDA30D /* UIPageViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageViewController+.swift"; sourceTree = "<group>"; };
 		C3643AC1273558FF0058F542 /* SnapKit+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SnapKit+.swift"; sourceTree = "<group>"; };
 		C373984F27350F6400245B46 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		C37398532735100300245B46 /* NOTOSANSKR-MEDIUM-HESTIA.OTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NOTOSANSKR-MEDIUM-HESTIA.OTF"; sourceTree = "<group>"; };
@@ -209,10 +221,22 @@
 		C331A44F2766E7A70058F7BB /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				C331A4522766F99F0058F7BB /* MultiTab.swift */,
-				C331A4542766FAF00058F7BB /* TabBar.swift */,
+				C35C3613276B2D0600CDA30D /* TabPager */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		C35C3613276B2D0600CDA30D /* TabPager */ = {
+			isa = PBXGroup;
+			children = (
+				C35C3614276B2D2200CDA30D /* TabPagerView.swift */,
+				C35C361E276B2D6E00CDA30D /* StackCollection.swift */,
+				C35C361C276B2D5C00CDA30D /* TabPagerHeaderView.swift */,
+				C35C3618276B2D3600CDA30D /* TabPagerHeaderCell.swift */,
+				C35C361A276B2D4000CDA30D /* TabPagerHeaderCellModel.swift */,
+				C35C3616276B2D2D00CDA30D /* TabPagerContents.swift */,
+			);
+			path = TabPager;
 			sourceTree = "<group>";
 		};
 		C3643AC0273558EF0058F542 /* Pod */ = {
@@ -299,6 +323,7 @@
 				C3B50D782734B3AF00162B0B /* UIWindow+.swift */,
 				C397A12C2738F06400821B36 /* UIDevice+.swift */,
 				C3A90E242739033700A70772 /* UIButton+.swift */,
+				C35C3620276B2D9B00CDA30D /* UIPageViewController+.swift */,
 			);
 			path = Cocoa;
 			sourceTree = "<group>";
@@ -646,8 +671,10 @@
 				C3B50DFF2734B3B000162B0B /* BaseTabBarController.swift in Sources */,
 				C3B50E142734B3B000162B0B /* MoreSeeFlow.swift in Sources */,
 				C3B50E0B2734B3B000162B0B /* APIClient.swift in Sources */,
+				C35C3615276B2D2200CDA30D /* TabPagerView.swift in Sources */,
 				C3B50DDA2734B3AF00162B0B /* CALayer+.swift in Sources */,
 				C3B50DEB2734B3AF00162B0B /* Color+.swift in Sources */,
+				C35C361F276B2D6E00CDA30D /* StackCollection.swift in Sources */,
 				C3B50E152734B3B000162B0B /* SearchFlow.swift in Sources */,
 				C3B50DE22734B3AF00162B0B /* ReuseIdentifiable+.swift in Sources */,
 				C3B50E202734B3B000162B0B /* MoreSeeViewModel.swift in Sources */,
@@ -657,17 +684,20 @@
 				C3B50E1B2734B3B000162B0B /* SearchViewController.swift in Sources */,
 				C3B50DE72734B3AF00162B0B /* Codable+.swift in Sources */,
 				C3A90E222738F5C200A70772 /* HomeModel.swift in Sources */,
+				C35C3617276B2D2D00CDA30D /* TabPagerContents.swift in Sources */,
 				C3B50E1D2734B3B000162B0B /* SearchViewModel.swift in Sources */,
 				C3B50E192734B3B000162B0B /* HomeView.swift in Sources */,
 				C373985027350F6400245B46 /* UIFont+Extension.swift in Sources */,
 				C3B50E062734B3B000162B0B /* ViewModelType.swift in Sources */,
 				C3B50E132734B3B000162B0B /* HomeFlow.swift in Sources */,
 				C3B50DF22734B3AF00162B0B /* UIApplication+.swift in Sources */,
+				C35C361D276B2D5C00CDA30D /* TabPagerHeaderView.swift in Sources */,
 				C3B50DE12734B3AF00162B0B /* TableView+.swift in Sources */,
 				C3B50DDB2734B3AF00162B0B /* NSString+.swift in Sources */,
 				C3A90E6627391CDC00A70772 /* HomeDataSource.swift in Sources */,
 				C3B50E0E2734B3B000162B0B /* MainSteps.swift in Sources */,
 				C3B50E272734B3B000162B0B /* ServiceInfoManager.swift in Sources */,
+				C35C3619276B2D3600CDA30D /* TabPagerHeaderCell.swift in Sources */,
 				C3B50E112734B3B000162B0B /* MoreSeeStepper.swift in Sources */,
 				C3B50DF62734B3AF00162B0B /* UIButton+Rx.swift in Sources */,
 				C3B50DE32734B3AF00162B0B /* UIView+.swift in Sources */,
@@ -694,10 +724,12 @@
 				C3B50DF32734B3AF00162B0B /* UIScrollView+Rx.swift in Sources */,
 				C3B50E302734B3B000162B0B /* AppDelegate.swift in Sources */,
 				C3B50DF72734B3AF00162B0B /* UITableView+Rx.swift in Sources */,
+				C35C3621276B2D9B00CDA30D /* UIPageViewController+.swift in Sources */,
 				C3B50E122734B3B000162B0B /* AppStepper.swift in Sources */,
 				C3B50DED2734B3AF00162B0B /* Double+.swift in Sources */,
 				C3B50DDC2734B3AF00162B0B /* Int+.swift in Sources */,
 				C3B50E1A2734B3B000162B0B /* HomeViewController.swift in Sources */,
+				C35C361B276B2D4000CDA30D /* TabPagerHeaderCellModel.swift in Sources */,
 				C3B50E032734B3B000162B0B /* ViewModel.swift in Sources */,
 				C3643AC2273558FF0058F542 /* SnapKit+.swift in Sources */,
 				C3B50E092734B3B000162B0B /* Model.swift in Sources */,
