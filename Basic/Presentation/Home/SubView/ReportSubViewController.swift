@@ -1,8 +1,8 @@
 //
-//  HomeViewController.swift
+//  ReportSubViewController.swift
 //  Basic
 //
-//  Created by pineone on 2021/09/16.
+//  Created by pineone on 2021/12/16.
 //  Copyright (c) 2021 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
@@ -13,8 +13,8 @@ import Reusable
 import SnapKit
 import Then
 
-class HomeViewController: UIBaseViewController, ViewModelProtocol {
-    typealias ViewModel = HomeViewModel
+class ReportSubViewController: UIBaseViewController, ViewModelProtocol {
+    typealias ViewModel = ReportSubViewModel
     
     // MARK: - ViewModelProtocol
     var viewModel: ViewModel!
@@ -31,15 +31,20 @@ class HomeViewController: UIBaseViewController, ViewModelProtocol {
         bindingViewModel()
     }
     
+    // TODO: - Deinit 개발 완료 한 뒤 메모리가 정상적으로 해제 되면 삭제!
+    deinit {
+        Log.d("로그 : \(self)!!")
+    }
+    
     // MARK: - Binding
     func bindingViewModel() {
         let res = viewModel.transform(req: ViewModel.Input(actionTrigger: actionTrigger.asObservable()))
         
-        //subView.reportView.setupDI(actionRelay: )
+        subView.setupDI(relay: actionTrigger)
     }
     
     // MARK: - View
-    let subView = HomeView()
+    let subView = ReportSubView()
     
     func setupLayout() {
         view.addSubview(subView)

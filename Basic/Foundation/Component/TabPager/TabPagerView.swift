@@ -78,6 +78,7 @@ class TabPagerView: UIView {
         $0.alignment = .leading
         $0.distribution = .equalSpacing
         $0.delegate = self
+        $0.backgroundColor = .black ~ 20%
     }
 
     private lazy var pagerHeader = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
@@ -87,6 +88,7 @@ class TabPagerView: UIView {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 0
         $0.minimumInteritemSpacing = 0
+        $0.itemSize = CGSize(width: 50, height: 50)
     }).then {
         $0.register(TabPagerHeaderCell.self, forCellWithReuseIdentifier: TabPagerHeaderCell.identifier)
         $0.backgroundColor = R.Color.background
@@ -98,13 +100,16 @@ class TabPagerView: UIView {
         $0.dataSource = self
         $0.delegate = self
     }
-
-    let separateView = UIView().then {
-        $0.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.1)
+    
+    lazy var test = UILabel().then {
+        $0.text = "테스트"
     }
+
 
     private lazy var contentView = TabPagerContents().then {
         $0.onSelectionChanged = selectionChangeCloser
+        $0.accessibilityIdentifier = "contentView"
+        $0.backgroundColor = .red ~ 10%
     }
 
     // MARK: Property
@@ -135,6 +140,7 @@ class TabPagerView: UIView {
             self.addSubview(pagerHeader)
             pagerHeader.snp.makeConstraints {
                 $0.top.leading.trailing.equalToSuperview()
+                $0.height.equalTo(30)
             }
         } else {
             // add Stack
@@ -146,27 +152,23 @@ class TabPagerView: UIView {
                 $0.top.equalToSuperview()
                 $0.leading.equalToSuperview().offset(-20)
                 $0.trailing.equalToSuperview().offset(20)
+                $0.height.equalTo(50) //높이 설정 필요...
             }
         }
 
-        if let _ = separateView.superview {
-            separateView.removeFromSuperview()
-        }
 
         if let _ = contentView.superview {
             contentView.removeFromSuperview()
         }
 
-        self.addSubview(separateView)
-        separateView.snp.makeConstraints {
-            $0.top.equalTo(self.equleSpace ? stackCollection.snp.bottom : pagerHeader.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
 
         self.addSubview(contentView)
         contentView.snp.makeConstraints {
-            $0.top.equalTo(separateView.snp.bottom)
+            $0.top.equalTo(stackCollection.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
+//            $0.center.equalToSuperview()
+//            $0.height.equalTo(300)
+//            $0.width.equalToSuperview()
         }
     }
 
@@ -244,17 +246,11 @@ class TabPagerView: UIView {
             self.stackCollection.addArrangedSubviews(models: dataSource?.wholeCellModel() ?? [])
             self.stackCollection.reloadInputViews()
         }
-
-        self.separateView.snp.makeConstraints {
-            $0.height.equalTo(self.layoutDelegate?.heightForSeparation?() ?? 1)
-        }
-
+        
         self.contentView.reload(self.current.value ?? 0)
     }
 
     func didLoadsetupLayout(handler: (() -> Void)? = nil) {
-        // separate view
-        separateView.backgroundColor = self.dataSource?.separatViewColor() ?? .lightGray
 
         self.contentView.reload(current.value ?? 0)
 

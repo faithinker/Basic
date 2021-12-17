@@ -1,8 +1,8 @@
 //
-//  HomeView.swift
+//  ReportSubView.swift
 //  Basic
 //
-//  Created by pineone on 2021/09/16.
+//  Created by pineone on 2021/12/16.
 //  Copyright (c) 2021 ___ORGANIZATIONNAME___. All rights reserved.
 //
 
@@ -11,67 +11,75 @@ import SnapKit
 import Then
 import RxSwift
 import RxCocoa
-import RxDataSources
-import Action
 
-class HomeView: UIBasePreviewType {
+class ReportSubView: UIBasePreviewType {
     
     // MARK: - Model type implemente
     typealias Model = Void
     
-    let action = PublishRelay<HomeActionType>()
+    let actionRelay = PublishRelay<HomeActionType>()
     
     // MARK: - init
-    override init(naviType: BaseNavigationShowType = .centerTitle) {
+    override init(naviType: BaseNavigationShowType = .none) {
         super.init(naviType: naviType)
-        naviBar.title = "테스트"
         setupLayout()
+        bindData()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - View
-    lazy var reportView = ReportView().then {
-        $0.action.bind(to: action).disposed(by: rx.disposeBag)
+    // TODO: - Deinit 개발 완료 한 뒤 메모리가 정상적으로 해제 되면 삭제!
+    deinit {
+        Log.d("로그 : \(self)!!")
     }
     
+    // MARK: - View
+    lazy var label = UILabel().then {
+        $0.text = "ReportSub View"
+        $0.textColor = .red
+    }
     
     // MARK: - Outlets
     
     // MARK: - Methods
     func setupLayout() {
-        backgroundColor = .white
-        
-        addSubview(reportView)
-        
-        Log.d("호출순서")
-        reportView.snp.makeConstraints {
-            $0.top.equalTo(naviBar.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-//            $0.center.equalToSuperview()
-//            $0.width.equalTo(300)
-//            $0.height.equalTo(700)
+        addSubview(label)
+        label.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
-        reportView.reloadDatas()
-        
-        
     }
     
+    // MARK: - SetupDI
+    /// User Input
+    @discardableResult
+    func setupDI(relay: PublishRelay<HomeActionType>) -> Self {
+        actionRelay.bind(to: relay).disposed(by: rx.disposeBag)
+        return self
+    }
+    
+    func setupDI(observable: Observable<[Model]>) {
+        // model Dependency Injection
+    }
+    
+    func bindData() {
+        // d
+    }
 }
+
 
 // MARK: - PreView
 #if canImport(SwiftUI) && DEBUG
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct Home_Previews: PreviewProvider {
+struct ReportSub_Previews: PreviewProvider {
     static var previews: some View {
         //        Group {
         //            ForEach(UIView.previceSupportDevices, id: \.self) { deviceName in
         //                DebugPreviewView {
-        //                    return HomeView()
+        //                    return ReportSubView()
         //                }.previewDevice(PreviewDevice(rawValue: deviceName))
         //                    .previewDisplayName(deviceName)
         //                    .previewLayout(.sizeThatFits)
@@ -79,7 +87,7 @@ struct Home_Previews: PreviewProvider {
         //        }        
         Group {
             DebugPreviewView {
-                let view = HomeView()
+                let view = ReportSubView()
                 //                .then {
                 //                    $0.setupDI(observable: Observable.just([]))
                 //                }

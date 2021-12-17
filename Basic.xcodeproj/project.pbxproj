@@ -92,6 +92,10 @@
 		C3B50E2E2734B3B000162B0B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B50DD32734B3AF00162B0B /* LaunchScreen.storyboard */; };
 		C3B50E302734B3B000162B0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B50DD72734B3AF00162B0B /* AppDelegate.swift */; };
 		C3B50E322734B3B000162B0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B50DD92734B3AF00162B0B /* SceneDelegate.swift */; };
+		C3E8FA35276B41F1007DF2EF /* ReportSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8FA32276B41F1007DF2EF /* ReportSubViewController.swift */; };
+		C3E8FA36276B41F1007DF2EF /* ReportSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8FA33276B41F1007DF2EF /* ReportSubView.swift */; };
+		C3E8FA37276B41F1007DF2EF /* ReportSubViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8FA34276B41F1007DF2EF /* ReportSubViewModel.swift */; };
+		C3E8FA39276B4744007DF2EF /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E8FA38276B4744007DF2EF /* ReportView.swift */; };
 		FF5DCA7C8554A57469F9AA81 /* Pods_Basic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09442B4F650317D470B65273 /* Pods_Basic.framework */; };
 /* End PBXBuildFile section */
 
@@ -187,6 +191,10 @@
 		C3B50DD82734B3AF00162B0B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3B50DD92734B3AF00162B0B /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C3DF5FAC2734AC13006E9D2D /* Basic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Basic.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3E8FA32276B41F1007DF2EF /* ReportSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubViewController.swift; sourceTree = "<group>"; };
+		C3E8FA33276B41F1007DF2EF /* ReportSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubView.swift; sourceTree = "<group>"; };
+		C3E8FA34276B41F1007DF2EF /* ReportSubViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSubViewModel.swift; sourceTree = "<group>"; };
+		C3E8FA38276B4744007DF2EF /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -445,6 +453,7 @@
 		C3B50DB82734B3AF00162B0B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				C3E8FA31276B4079007DF2EF /* SubView */,
 				C3A90E6427391C9400A70772 /* DataSource */,
 				C397A1222738E96D00821B36 /* Cell */,
 				C3B50DB92734B3AF00162B0B /* HomeViewModel.swift */,
@@ -528,6 +537,17 @@
 				C3B50DD02734B3AF00162B0B /* Suprroting Files */,
 			);
 			path = Basic;
+			sourceTree = "<group>";
+		};
+		C3E8FA31276B4079007DF2EF /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				C3E8FA38276B4744007DF2EF /* ReportView.swift */,
+				C3E8FA32276B41F1007DF2EF /* ReportSubViewController.swift */,
+				C3E8FA33276B41F1007DF2EF /* ReportSubView.swift */,
+				C3E8FA34276B41F1007DF2EF /* ReportSubViewModel.swift */,
+			);
+			path = SubView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -700,6 +720,7 @@
 				C35C3619276B2D3600CDA30D /* TabPagerHeaderCell.swift in Sources */,
 				C3B50E112734B3B000162B0B /* MoreSeeStepper.swift in Sources */,
 				C3B50DF62734B3AF00162B0B /* UIButton+Rx.swift in Sources */,
+				C3E8FA35276B41F1007DF2EF /* ReportSubViewController.swift in Sources */,
 				C3B50DE32734B3AF00162B0B /* UIView+.swift in Sources */,
 				C3B50E1C2734B3B000162B0B /* SearchView.swift in Sources */,
 				C3A90E252739033700A70772 /* UIButton+.swift in Sources */,
@@ -723,6 +744,7 @@
 				C3B50E002734B3B000162B0B /* BaseNavigationController.swift in Sources */,
 				C3B50DF32734B3AF00162B0B /* UIScrollView+Rx.swift in Sources */,
 				C3B50E302734B3B000162B0B /* AppDelegate.swift in Sources */,
+				C3E8FA36276B41F1007DF2EF /* ReportSubView.swift in Sources */,
 				C3B50DF72734B3AF00162B0B /* UITableView+Rx.swift in Sources */,
 				C35C3621276B2D9B00CDA30D /* UIPageViewController+.swift in Sources */,
 				C3B50E122734B3B000162B0B /* AppStepper.swift in Sources */,
@@ -737,6 +759,7 @@
 				C3B50E052734B3B000162B0B /* FlowSugar.swift in Sources */,
 				C3B50E022734B3B000162B0B /* UIKitPreview.swift in Sources */,
 				C397A12D2738F06400821B36 /* UIDevice+.swift in Sources */,
+				C3E8FA39276B4744007DF2EF /* ReportView.swift in Sources */,
 				C3B50E322734B3B000162B0B /* SceneDelegate.swift in Sources */,
 				C3B50DE62734B3AF00162B0B /* UIStackView+.swift in Sources */,
 				C3B50DEE2734B3AF00162B0B /* UIScrollView+.swift in Sources */,
@@ -745,6 +768,7 @@
 				C3B50DE02734B3AF00162B0B /* Array+.swift in Sources */,
 				C397A12A2738E9DC00821B36 /* ReviewTableViewCell.swift in Sources */,
 				C3B50DE52734B3AF00162B0B /* UIWindow+.swift in Sources */,
+				C3E8FA37276B41F1007DF2EF /* ReportSubViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
