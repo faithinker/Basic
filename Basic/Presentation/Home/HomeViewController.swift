@@ -29,6 +29,7 @@ class HomeViewController: UIBaseViewController, ViewModelProtocol {
         // Do any additional setup after loading the view.
         setupLayout()
         bindingViewModel()
+        subView.reportView.reloadDatas()
     }
     
     // MARK: - Binding
@@ -39,7 +40,7 @@ class HomeViewController: UIBaseViewController, ViewModelProtocol {
     }
     
     // MARK: - View
-    let subView = HomeView()
+    lazy var subView = HomeView()
     
     func setupLayout() {
         view.addSubview(subView)

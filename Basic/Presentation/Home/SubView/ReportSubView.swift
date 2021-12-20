@@ -45,6 +45,7 @@ class ReportSubView: UIBasePreviewType {
     
     // MARK: - Methods
     func setupLayout() {
+        self.backgroundColor = .white
         addSubview(label)
         label.snp.makeConstraints {
             $0.center.equalToSuperview()

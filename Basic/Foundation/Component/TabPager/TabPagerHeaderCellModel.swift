@@ -33,10 +33,10 @@ public struct TabPagerHeaderCellModel {
 }
 
 class TabPagerHeaderDefault {
-    static let indicatorColor: UIColor = #colorLiteral(red: 0.3411764706, green: 0.2156862745, blue: 0.8392156863, alpha: 1) //R.Color.base
+    static let indicatorColor: UIColor = .black //R.Color.base
     static let indicatorHeight: CGFloat = 2.0
     static let selectedFont = UIFont.notoSans(.bold, size: 16)
-    static let selectedColor: UIColor = #colorLiteral(red: 0.3411764706, green: 0.2156862745, blue: 0.8392156863, alpha: 1) //R.Color.black
+    static let selectedColor: UIColor = .black //R.Color.black
     static let deSelectedFont = UIFont.notoSans(.bold, size: 16)
-    static let deSelectedColor: UIColor = R.Color.black ~ 20%
+    static let deSelectedColor: UIColor = R.Color.black ~ 50%
 }

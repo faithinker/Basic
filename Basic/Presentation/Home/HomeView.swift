@@ -49,12 +49,13 @@ class HomeView: UIBasePreviewType {
         Log.d("호출순서")
         reportView.snp.makeConstraints {
             $0.top.equalTo(naviBar.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-BaseTabBarController.shared.tabBarHeight)
 //            $0.center.equalToSuperview()
 //            $0.width.equalTo(300)
 //            $0.height.equalTo(700)
         }
-        reportView.reloadDatas()
+        
         
         
     }

@@ -83,9 +83,9 @@ class HomeViewModel: ViewModelType, Stepper {
     }
     
     func makeModels() -> [TabPagerHeaderCellModel] {
-        let dayTableHeaderCell = TabPagerHeaderCellModel(title: "일별", indicatorHeight: 1)
-        let weekTableHeaderCell = TabPagerHeaderCellModel(title: "주별", indicatorHeight: 1)
-        let monthTableHeaderCell = TabPagerHeaderCellModel(title: "월별", indicatorHeight: 1)
+        let dayTableHeaderCell = TabPagerHeaderCellModel(title: "일별", indicatorHeight: 4)
+        let weekTableHeaderCell = TabPagerHeaderCellModel(title: "주별", indicatorHeight: 4)
+        let monthTableHeaderCell = TabPagerHeaderCellModel(title: "월별", indicatorHeight: 4)
         
         let models: [TabPagerHeaderCellModel] = [dayTableHeaderCell, weekTableHeaderCell, monthTableHeaderCell]
         

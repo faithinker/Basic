@@ -78,7 +78,6 @@ class TabPagerView: UIView {
         $0.alignment = .leading
         $0.distribution = .equalSpacing
         $0.delegate = self
-        $0.backgroundColor = .black ~ 20%
     }
 
     private lazy var pagerHeader = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
@@ -100,16 +99,9 @@ class TabPagerView: UIView {
         $0.dataSource = self
         $0.delegate = self
     }
-    
-    lazy var test = UILabel().then {
-        $0.text = "테스트"
-    }
-
 
     private lazy var contentView = TabPagerContents().then {
         $0.onSelectionChanged = selectionChangeCloser
-        $0.accessibilityIdentifier = "contentView"
-        $0.backgroundColor = .red ~ 10%
     }
 
     // MARK: Property
@@ -131,7 +123,7 @@ class TabPagerView: UIView {
 
     public weak var hostController: UIViewController?
 
-    func setupLayout() {
+    func setupLayout() {        
         if !equleSpace {
             if let _ = pagerHeader.superview {
                 pagerHeader.removeFromSuperview()

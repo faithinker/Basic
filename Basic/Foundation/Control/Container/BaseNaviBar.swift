@@ -307,8 +307,7 @@ class BaseNavigationBar: UIView {
         case .centerTitle:
             [titleLabel, bottomLine].forEach { $0.isHidden = false }
             titleLabel.snp.remakeConstraints {
-                $0.centerX.equalToSuperview()
-                $0.bottom.equalToSuperview().offset(-21)
+                $0.center.equalToSuperview()
             }
         case .onlyCenterTitle:
             titleLabel.isHidden = false
