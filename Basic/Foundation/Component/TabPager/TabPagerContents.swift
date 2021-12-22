@@ -41,53 +41,44 @@ class TabPagerContents: UIView {
 
 // MARK: UIPageViewControllerDelegate
 extension TabPagerContents: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    // page viewController인데 페이징을 못해요.. UID 페이징 제거 요청으로 인해 페이징 주석
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-//        nil
-//    }
-//
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-//        nil
-//    }
-
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-            let controllerCounts = self.dataSource?.numberOfItems() ?? 0
-    
-            let currentIndex = viewController.index
-            if currentIndex == controllerCounts - 1 {
-                return nil
-            }
-            let controller = dataSource?.controller(at: currentIndex + 1)
-            controller?.index = currentIndex + 1
-            return controller
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let currentIndex = viewController.index
+        if currentIndex == 0 {
+            return nil
         }
+        let controller = dataSource?.controller(at: currentIndex - 1)
+        controller?.index = currentIndex - 1
+        return controller
+    }
     
-        func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-            let currentIndex = viewController.index
-            if currentIndex == 0 {
-                return nil
-            }
-            let controller = dataSource?.controller(at: currentIndex - 1)
-            controller?.index = currentIndex - 1
-            return controller
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let controllerCounts = self.dataSource?.numberOfItems() ?? 0
+        
+        let currentIndex = viewController.index
+        if currentIndex == controllerCounts - 1 {
+            return nil
         }
+        let controller = dataSource?.controller(at: currentIndex + 1)
+        controller?.index = currentIndex + 1
+        return controller
+    }
     
-        func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-            guard let controller = pendingViewControllers.get(0) else {
-                return
-            }
-            self.delegate?.willTransition?(to: controller.index)
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        guard let controller = pendingViewControllers.get(0) else {
+            return
         }
+        self.delegate?.willTransition?(to: controller.index)
+    }
     
-        func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-            DispatchQueue.main.async {
-                if completed {
-                    let currentIndex = (self.pageViewController?.viewControllers?.get(0))?.index ?? 0
-                    self.onSelectionChanged?(currentIndex)
-                    self.delegate?.didTransition?(to: currentIndex)
-                }
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        DispatchQueue.main.async {
+            if completed {
+                let currentIndex = (self.pageViewController?.viewControllers?.get(0))?.index ?? 0
+                self.onSelectionChanged?(currentIndex)
+                self.delegate?.didTransition?(to: currentIndex)
             }
         }
+    }
 }
 
 extension TabPagerContents {

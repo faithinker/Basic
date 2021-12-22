@@ -19,7 +19,7 @@ class ReportView: UIView {
 
     let action = PublishRelay<HomeActionType>()
     
-    var containerView: TabPagerView!
+    lazy var containerView = TabPagerView()
     
     init(_ data: String = "") {
         super.init(frame: .zero)
@@ -30,15 +30,20 @@ class ReportView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    // MARK: - View
 
+    
+    // MARK: - Methods
     func setupLayout() {
         
-        self.containerView = TabPagerView(isEquleSpace: true)
+        self.containerView = TabPagerView(isEquleSpace: true, isTabAnimation: false)
         
         addSubview(containerView)
         
         containerView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.top.bottom.equalToSuperview()
+            //$0.edges.equalToSuperview()
         }
     }
     

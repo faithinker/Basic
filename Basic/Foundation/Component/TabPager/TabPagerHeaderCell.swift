@@ -46,7 +46,6 @@ class TabPagerHeaderCell: UICollectionViewCell, Reusable {
     override var isSelected: Bool {
         didSet {
             self.title.font = isSelected ? selectedFont : deSelectedFont
-//            self.indicatorView.isHidden = !isSelected
             self.title.textColor = isSelected ? selectedColor : deSelectedColor
             if selectedImage != nil && deSelectedImage != nil {
                 self.iconView.image = isSelected ? selectedImage : deSelectedImage
@@ -58,11 +57,6 @@ class TabPagerHeaderCell: UICollectionViewCell, Reusable {
         }
     }
 
-    lazy var indicatorView = UIView().then {
-        $0.isHidden = true
-        $0.layer.cornerRadius = 1.5
-    }
-
     lazy var newBadgeIcon = UIView().then {
         $0.cornerRadius = 3.5
         $0.isHidden = true
@@ -72,7 +66,6 @@ class TabPagerHeaderCell: UICollectionViewCell, Reusable {
 
     func setupLayout() {
 //        self.addSubview(title)
-//        self.addSubview(indicatorView)
 //        self.addSubview(newBadgeIcon)
 
         isSelected = false
@@ -87,8 +80,6 @@ class TabPagerHeaderCell: UICollectionViewCell, Reusable {
     func cellset(_ data: TabPagerHeaderCellModel?) {
         cellClear()
         self.title.attributedText = data?.title.styling(.letterSpace(-0.4))
-
-        self.indicatorView.backgroundColor = data?.indicatorColor ?? TabPagerHeaderDefault.indicatorColor
 
         self.selectedFont = data?.selectedFont ?? TabPagerHeaderDefault.selectedFont
         self.deSelectedFont = data?.deSelectedFont ?? TabPagerHeaderDefault.deSelectedFont
@@ -111,22 +102,11 @@ class TabPagerHeaderCell: UICollectionViewCell, Reusable {
                 $0.trailing.equalToSuperview().offset(-6)
             }
         } else {
-            addSubviews([title, indicatorView, newBadgeIcon])
+            addSubviews([title, newBadgeIcon])
             title.snp.remakeConstraints {
                 $0.center.equalToSuperview()
-//                $0.height.equalTo(56 - TabPagerHeaderDefault.indicatorHeight)
 //                $0.top.equalToSuperview()
                 $0.width.equalTo(width)
-            }
-
-            indicatorView.snp.remakeConstraints {
-                $0.bottom.equalToSuperview()
-                //$0.leading.equalTo(title.snp.leading).offset(-10)
-                //$0.trailing.equalTo(title.snp.trailing).offset(10)
-                $0.leading.equalToSuperview()//.offset(5).priority(.medium)
-                $0.trailing.equalToSuperview()//.offset(-5).priority(.medium)
-                $0.height.equalTo(TabPagerHeaderDefault.indicatorHeight)
-//                $0.top.equalTo(title.snp.bottom).priority(.medium)
             }
 
             newBadgeIcon.snp.remakeConstraints {
@@ -146,7 +126,6 @@ class TabPagerHeaderCell: UICollectionViewCell, Reusable {
             layoutSubviews()
 
             self.title.font = isSelected ? selectedFont : deSelectedFont
-//            self.indicatorView.isHidden = !isSelected
             self.title.textColor = isSelected ? selectedColor : deSelectedColor
         }
     }

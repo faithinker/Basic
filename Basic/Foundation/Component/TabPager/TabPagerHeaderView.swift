@@ -41,15 +41,9 @@ class TabPagerHeaderView: UIView {
     var selectedColor: UIColor = TabPagerHeaderDefault.selectedColor
     var deSelectedColor: UIColor = TabPagerHeaderDefault.deSelectedColor
 
-    lazy var indicatorView = UIView().then {
-        $0.isHidden = true
-        $0.layer.cornerRadius = 1.5
-    }
-
     func setupLayout() {
         self.addSubview(container)
         container.addSubview(title)
-        self.addSubview(indicatorView)
 
         title.isSelected = false
     }
@@ -66,12 +60,10 @@ class TabPagerHeaderView: UIView {
             .subscribe(onNext: {[weak self] isSelected in
                 guard let `self` = self else { return }
 //                self.title.titleLabel?.font = isSelected ? self.selectedFont : self.deSelectedFont
-                self.indicatorView.isHidden = !isSelected
             }).disposed(by: rx.disposeBag)
     }
 
     func cellset(_ data: TabPagerHeaderCellModel?) {
-        self.indicatorView.backgroundColor = data?.indicatorColor ?? TabPagerHeaderDefault.indicatorColor
 
         self.selectedFont = data?.selectedFont ?? TabPagerHeaderDefault.selectedFont
         self.deSelectedFont = data?.deSelectedFont ?? TabPagerHeaderDefault.deSelectedFont
@@ -112,29 +104,12 @@ class TabPagerHeaderView: UIView {
 
         title.snp.remakeConstraints {
             $0.leading.trailing.equalToSuperview()
-//            $0.height.equalTo(56 - TabPagerHeaderDefault.indicatorHeight)
 //            $0.top.equalToSuperview()
 //            $0.width.equalTo(ceil(width))
             $0.top.equalToSuperview().offset(4)
 //            $0.height.equalTo(25)
             $0.bottom.equalToSuperview().offset(-3)
             $0.width.equalTo(width)
-        }
-
-        indicatorView.snp.remakeConstraints {
-            $0.bottom.equalToSuperview()
-            if let indicatorH = data?.indicatorHeight {
-                $0.height.equalTo(indicatorH)
-            } else {
-                $0.height.equalTo(TabPagerHeaderDefault.indicatorHeight)
-            }
-            if let width = data?.indicatorPadding {
-                $0.leading.equalTo(title.snp.leading).offset(-width)
-                $0.trailing.equalTo(title.snp.trailing).offset(width)
-            } else {
-                $0.leading.trailing.equalTo(title)
-            }
-//            $0.top.equalTo(title.snp.bottom).priority(.medium)
         }
 
         updateConstraints()

@@ -13,6 +13,7 @@ import SnapKit
 import Then
 import UIKit
 
+// PageVC 델리게이트를 TabPager델리게이트로 복사 전달
 @objc public protocol TabPagerViewDelegate: AnyObject {
     @objc optional func willSelectButton(from fromIndex: Int, to toIndex: Int) -> Bool
     @objc optional func didSelectButton(at index: Int)
@@ -24,21 +25,28 @@ public protocol TabPagerViewDataSource: AnyObject {
     func numberOfItems() -> Int?
     func controller(at index: Int) -> UIViewController?
     func setCell(at index: Int) -> TabPagerHeaderCellModel?
+    /// 구분선 색깔
     func separatViewColor() -> UIColor
+    /// 탭 상태
     func defaultIndex() -> Int
     func shouldEnableSwipeable() -> Bool // default is true
     func wholeCellModel() -> [TabPagerHeaderCellModel]
 }
 
+/// 딜리게이트 채택하여 각페이지마다 개별적인 설정이 가능하거나 닐합병연산자로 기본값을 준다.
 @objc public protocol TabPagerViewDelegateLayout: AnyObject {
     // Header Setting
 
-    /// default: 40
+    /// 탭의 높이 default: 40
     @objc optional func heightForHeader() -> CGFloat
     /// default: 0
     @objc optional func leftOffsetForHeader() -> CGFloat
-    /// default: 2
+    /// 구분선 default: 2
     @objc optional func heightForSeparation() -> CGFloat
+    /// 지시선 default: 2
+    @objc optional func heightForIndicator() -> CGFloat
+    /// 지시선 색깔 default: black
+    @objc optional func colorForIndicator() -> UIColor
     /// backgroundColor
     @objc optional func backgroundColor() -> UIColor
     /// equalHeaderCellWidth
@@ -51,17 +59,21 @@ class TabPagerView: UIView {
     weak var delegate: TabPagerViewDelegate?
     weak var dataSource: TabPagerViewDataSource?
     weak var layoutDelegate: TabPagerViewDelegateLayout?
-
+    
+    /// pageHeader를 쓸지 StackCollection을 쓸지 정해준다.
     var equleSpace = false
+    
+    var tabAnimation = true
 
     // MARK: init
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
 //    }
 
-    init(isEquleSpace: Bool = false) {
+    init(isEquleSpace: Bool = false, isTabAnimation: Bool = true ) {
         super.init(frame: .zero)
         self.equleSpace = isEquleSpace
+        self.tabAnimation = isTabAnimation
         setupLayout()
         binding()
     }
@@ -73,13 +85,28 @@ class TabPagerView: UIView {
     }
 
     // MARK: view
+    /// 고정된 헤더탭
     private lazy var stackCollection = StackCollection().then {
         $0.axis = .horizontal
         $0.alignment = .leading
-        $0.distribution = .equalSpacing
+        // .equalSpacing으로 하게 되면 글자크기만큼만 width를 잡는다.
+        $0.distribution = .fillEqually
         $0.delegate = self
     }
-
+    
+    /// 구분선
+    lazy var separateView = UIView().then {
+        $0.accessibilityLabel = "SeparateView"
+    }
+    
+    /// 탭 지시선
+    private lazy var indicatorView = UIView().then {
+        $0.layer.cornerRadius = 1.5
+        $0.backgroundColor = self.layoutDelegate?.colorForIndicator?() ?? .black
+        $0.accessibilityLabel = "IndicatorView"
+    }
+    
+    /// 좌우 스크롤되는 헤더탭
     private lazy var pagerHeader = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         if !equleSpace {
             $0.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
@@ -105,11 +132,15 @@ class TabPagerView: UIView {
     }
 
     // MARK: Property
+    /// PVC 스와이프시 index 변경을 전달
     lazy var selectionChangeCloser : ((_ index: Int) -> Void) = { index in
         self.current.accept(index)
+        self.oldIndex.accept(index)
     }
 
     private lazy var current = BehaviorRelay<Int?>(value: nil)
+    
+    private lazy var oldIndex = BehaviorRelay<Int?>(value: defaultPageIndex)
 
     private var defaultPageIndex: Int? {
         guard let _ = self.dataSource?.numberOfItems() else {
@@ -123,7 +154,7 @@ class TabPagerView: UIView {
 
     public weak var hostController: UIViewController?
 
-    func setupLayout() {        
+    func setupLayout() {
         if !equleSpace {
             if let _ = pagerHeader.superview {
                 pagerHeader.removeFromSuperview()
@@ -142,25 +173,29 @@ class TabPagerView: UIView {
             self.addSubview(stackCollection)
             stackCollection.snp.makeConstraints {
                 $0.top.equalToSuperview()
-                $0.leading.equalToSuperview().offset(-20)
-                $0.trailing.equalToSuperview().offset(20)
-                $0.height.equalTo(50) //높이 설정 필요...
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(33) //높이 설정 필요...
             }
         }
 
+        if let _ = separateView.superview {
+            separateView.removeFromSuperview()
+        }
+        
+        insertSubview(separateView, at: 0)
+        separateView.snp.makeConstraints {
+            $0.top.equalTo(self.equleSpace ? stackCollection.snp.bottom : pagerHeader.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+        }
 
         if let _ = contentView.superview {
             contentView.removeFromSuperview()
         }
 
-
         self.addSubview(contentView)
         contentView.snp.makeConstraints {
-            $0.top.equalTo(stackCollection.snp.bottom)
+            $0.top.equalTo(separateView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-//            $0.center.equalToSuperview()
-//            $0.height.equalTo(300)
-//            $0.width.equalToSuperview()
         }
     }
 
@@ -168,10 +203,20 @@ class TabPagerView: UIView {
         self.current.compactMap { $0 }
             //.distinctUntilChanged()
             .subscribe(onNext: { [weak self] currentIndex in
-                let interactionView = self?.equleSpace ?? false ? self?.stackCollection : self?.pagerHeader
-                interactionView?.isUserInteractionEnabled = false
-                self?.contentView.pageScroll(to: currentIndex) {
-                    interactionView?.isUserInteractionEnabled = true
+                guard let `self` = self else { return }
+                let interactionView = self.equleSpace ? self.stackCollection : self.pagerHeader
+                interactionView.isUserInteractionEnabled = false
+                self.contentView.pageScroll(to: currentIndex) {
+                    interactionView.isUserInteractionEnabled = true
+                }
+                
+                UIView.animate(withDuration: self.tabAnimation ? 0.2 : 0, delay: 0, options: .curveEaseInOut) {
+                    self.indicatorView.frame.origin.x = (self.stackCollection.frame.width / CGFloat(self.dataSource?.numberOfItems() ?? 4)) * CGFloat(currentIndex)
+                } completion: { _ in
+                    // 백그라운드 -> 포그라운드 진입시 레이아웃 정보가 잡히지 않는 문제로 인한 계산식
+                    self.indicatorView.snp.updateConstraints {
+                        $0.leading.equalToSuperview().offset((self.stackCollection.frame.width / CGFloat(self.dataSource?.numberOfItems() ?? 4)) * CGFloat(currentIndex))
+                    }
                 }
         }).disposed(by: rx.disposeBag)
 
@@ -206,7 +251,7 @@ class TabPagerView: UIView {
             self.pagerHeader.snp.remakeConstraints {
                 $0.leading.equalToSuperview().offset(self.layoutDelegate?.leftOffsetForHeader?() ?? 0)
                 $0.top.trailing.equalToSuperview()
-                $0.height.equalTo(self.layoutDelegate?.heightForHeader?() ?? 56)
+                $0.height.equalTo(self.layoutDelegate?.heightForHeader?() ?? 40)
             }
 
             self.pagerHeader.reloadData()
@@ -229,8 +274,7 @@ class TabPagerView: UIView {
                 }
             } else {
                 self.stackCollection.snp.remakeConstraints {
-                    $0.leading.equalToSuperview().offset(20)
-                    $0.trailing.equalToSuperview().offset(-20)
+                    $0.leading.trailing.equalToSuperview()
                     $0.top.equalToSuperview()
                     $0.height.equalTo(self.layoutDelegate?.heightForHeader?() ?? 56)
                 }
@@ -239,11 +283,29 @@ class TabPagerView: UIView {
             self.stackCollection.reloadInputViews()
         }
         
+        separateView.snp.makeConstraints {
+            $0.height.equalTo(self.layoutDelegate?.heightForSeparation?() ?? 2)
+        }
+        
+        
         self.contentView.reload(self.current.value ?? 0)
+        
+        // 안하면 stackCollection.frame.width가 0으로 찍힘
+        layoutIfNeeded()
+
+        guard let count = self.dataSource?.numberOfItems() else { return }
+        stackCollection.addSubview(indicatorView)
+        indicatorView.snp.remakeConstraints {
+            $0.width.equalTo(stackCollection.frame.width/CGFloat(count))
+            $0.height.equalTo(self.layoutDelegate?.heightForIndicator?() ?? 2)
+            $0.bottom.equalTo(separateView.snp.top).offset(1)
+            $0.leading.equalToSuperview().offset((self.stackCollection.frame.width / CGFloat(self.dataSource?.numberOfItems() ?? 4)) * CGFloat(self.current.value ?? 0))
+        }
     }
 
     func didLoadsetupLayout(handler: (() -> Void)? = nil) {
-
+        separateView.backgroundColor = dataSource?.separatViewColor() ?? .lightGray
+        
         self.contentView.reload(current.value ?? 0)
 
         if (self.layoutDelegate?.isStaticCellWidth?() ?? false) && !equleSpace {
@@ -251,14 +313,16 @@ class TabPagerView: UIView {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { [weak self] in
-            self?.changeIndex(self?.defaultPageIndex ?? 0)
-            self?.layoutIfNeeded()
+            guard let `self` = self else { return }
+            self.changeIndex(self.defaultPageIndex ?? 0)
+            self.layoutIfNeeded()
             handler?()
         })
     }
 
     func changeIndex(_ index: Int) {
         self.current.accept(index)
+        self.oldIndex.accept(index)
     }
 
     func updateFixedHeaderCelllayout(count: Int) {
@@ -297,8 +361,10 @@ class TabPagerView: UIView {
 }
 
 extension TabPagerView: SCDelegate {
+    /// 헤더탭을 탭할 시 index 전달
     func stackCollection(_ sc: StackCollection, didSelectItemAt item: Int) {
         current.accept(item)
+        oldIndex.accept(item)
     }
 }
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -322,6 +388,7 @@ extension TabPagerView: UICollectionViewDataSource, UICollectionViewDelegate {
 //        collectionView.collectionViewLayout.invalidateLayout()
 
         self.current.accept(indexPath.item)
+        self.oldIndex.accept(indexPath.item)
 //
 //        DispatchQueue.main.async {
 //            collectionView.layoutIfNeeded()

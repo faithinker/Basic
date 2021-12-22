@@ -46,7 +46,6 @@ class HomeView: UIBasePreviewType {
         
         addSubview(reportView)
         
-        Log.d("호출순서")
         reportView.snp.makeConstraints {
             $0.top.equalTo(naviBar.snp.bottom)
             $0.leading.trailing.equalToSuperview()
@@ -55,8 +54,6 @@ class HomeView: UIBasePreviewType {
 //            $0.width.equalTo(300)
 //            $0.height.equalTo(700)
         }
-        
-        
         
     }
     

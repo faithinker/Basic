@@ -79,15 +79,23 @@ class HomeViewModel: ViewModelType, Stepper {
         vc3.viewModel = vm3
         vm3.setupDI(self.subViewTrigger)
         
-        return [vc1, vc2, vc3]
+        let vc4 = ReportSubViewController()
+        let vm4 = ReportSubViewModel()
+        vm4.modelType = .month
+        vc4.viewModel = vm3
+        vm4.setupDI(self.subViewTrigger)
+        
+        return [vc1, vc2, vc3, vc4]
     }
     
     func makeModels() -> [TabPagerHeaderCellModel] {
-        let dayTableHeaderCell = TabPagerHeaderCellModel(title: "일별", indicatorHeight: 4)
-        let weekTableHeaderCell = TabPagerHeaderCellModel(title: "주별", indicatorHeight: 4)
-        let monthTableHeaderCell = TabPagerHeaderCellModel(title: "월별", indicatorHeight: 4)
+        let dayTableHeaderCell = TabPagerHeaderCellModel(title: "일별")
+        let weekTableHeaderCell = TabPagerHeaderCellModel(title: "주별")
+        let monthTableHeaderCell = TabPagerHeaderCellModel(title: "월별")
+        let testTableHeaderCell = TabPagerHeaderCellModel(title: "공지사항")
         
-        let models: [TabPagerHeaderCellModel] = [dayTableHeaderCell, weekTableHeaderCell, monthTableHeaderCell]
+        
+        let models: [TabPagerHeaderCellModel] = [dayTableHeaderCell, weekTableHeaderCell, monthTableHeaderCell, testTableHeaderCell]
         
         return models
     }
@@ -108,7 +116,7 @@ extension HomeViewModel: TabPagerViewDataSource {
     }
     
     func separatViewColor() -> UIColor {
-        return .clear
+        return UIColor(230,230,230)
     }
     
     func defaultIndex() -> Int {
@@ -140,18 +148,18 @@ extension HomeViewModel: TabPagerViewDelegate {
 
 extension HomeViewModel: TabPagerViewDelegateLayout {
     func leftOffsetForHeader() -> CGFloat { // 이만큼 공간 만들고 view에서 버튼 넣으면 될듯. 가로 50 세로 50으로.
-        return 56
+        return 60//56
     }
     
     func heightForHeader() -> CGFloat {
-        return 55
+        return 40
     }
     
     func heightForSeparation() -> CGFloat {
-        return 0
+        return 2
     }
     
     func backgroundColor() -> UIColor {
-        return .clear // #colorLiteral(red: 0.1254901961, green: 0.1254901961, blue: 0.1294117647, alpha: 0.5047451762)
+        return UIColor(230,230,230) // #colorLiteral(red: 0.1254901961, green: 0.1254901961, blue: 0.1294117647, alpha: 0.5047451762)
     }
 }

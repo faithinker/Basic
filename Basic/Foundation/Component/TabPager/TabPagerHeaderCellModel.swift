@@ -15,13 +15,11 @@ public struct TabPagerHeaderCellModel {
     var titleSelectedColor: UIColor?
     var titleDeSelectedColor: UIColor?
 
-    let indicatorColor: UIColor? = nil
-    var indicatorHeight: CGFloat? = nil
     var displayNewIcon: Bool?
     var iconImage: UIImage?
     var iconSelectedImage: UIImage?
     var iconHighlightedImage: UIImage?
-    var indicatorPadding: CGFloat? = nil
+    var indicatorPadding: CGFloat? = nil // 삭제
     var iconEdgeInset: UIEdgeInsets? = nil
     
     func callAsFunction() -> TabPagerHeaderView {
@@ -32,9 +30,9 @@ public struct TabPagerHeaderCellModel {
     }
 }
 
+/// 탭페이저 상단의 아이템 설정.
+/// 구분선 및 지시선은 TabPagerView의 DataSource와 LayoutDelegate에서 처리함
 class TabPagerHeaderDefault {
-    static let indicatorColor: UIColor = .black //R.Color.base
-    static let indicatorHeight: CGFloat = 2.0
     static let selectedFont = UIFont.notoSans(.bold, size: 16)
     static let selectedColor: UIColor = .black //R.Color.black
     static let deSelectedFont = UIFont.notoSans(.bold, size: 16)

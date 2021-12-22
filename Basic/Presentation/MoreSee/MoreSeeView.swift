@@ -21,6 +21,7 @@ class MoreSeeView: UIBasePreviewType {
     override init(naviType: BaseNavigationShowType = .none) {
         super.init(naviType: naviType)
         setupLayout()
+        bindData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -33,6 +34,9 @@ class MoreSeeView: UIBasePreviewType {
         $0.textColor = .red
     }
     
+    lazy var test = SegmentControl()
+
+    
     // MARK: - Outlets
     
     // MARK: - Methods
@@ -43,6 +47,17 @@ class MoreSeeView: UIBasePreviewType {
         label.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
         }
+        
+        addSubview(test)
+        test.snp.makeConstraints {
+            $0.center.equalToSuperview().offset(50)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(38)
+        }
+    }
+    
+    func bindData() {
+        
     }
     
     func setupDI(observable: Observable<[Model]>) {
